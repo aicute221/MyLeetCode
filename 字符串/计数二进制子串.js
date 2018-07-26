@@ -7,37 +7,51 @@ var countBinarySubstrings = function(s) {
     if(len===1){
         return 0;
     }
-    if(s.indexOf("0") === -1 || s.indexOf("1") === -1){
-        return 0;
-    }
-    var a = "01";
-    var b = "10";
-    var num_a = 0;
-    var num_b = 0;
-    var i = 0;
-    var j = 0;
-    while(s.indexOf(a,i) !== -1){
-        num_a ++;
-        i = s.indexOf(a,i) + 1;
-        if(s.indexOf(a,i) === -1){
-            a = "0"+a+"1";
-            i = 0;
+    var count = 0;
+    var arr = [];
+    // var sum0 = 0;
+    // var sum1 = 0;
+    // for(var i = 0;i<len;i++){
+    //    if(s[i] === "0"){
+    //        if(sum1!==0){
+    //            arr.push(sum1);
+    //            sum1 = 0;
+    //        }
+    //        sum0++;
+    //    }else{
+    //        if(sum0!==0){
+    //            arr.push(sum0);
+    //            sum0 = 0;
+    //        }
+    //        sum1++;
+    //    }
+    // }
+    // if(sum0!==0){
+    //     arr.push(sum0);
+    //     sum0 = 0;
+    // }
+    // if(sum1!==0){
+    //     arr.push(sum1);
+    //     sum1 = 0;
+    // }
+    var sum = 1;
+    for(var i = 1;i<len;i++){
+        if(s[i]!==s[i-1]){
+            arr.push(sum);
+            sum = 1;
+        }else{
+            sum++;
         }
     }
-
-    while(s.indexOf(b,j) !== -1){
-        num_b ++;
-        j = s.indexOf(b,j) + 1;
-        // console.log(num_b,j,b);
-        if(s.indexOf(b,j) === -1){
-            b = "1"+b+"0";
-            j = 0;
-        }
+    arr.push(sum);
+    for(var j = 0;j<arr.length-1;j++){
+        count += Math.min(arr[j],arr[j+1]);
     }
-    return num_a+num_b;
+    return count;
 };
 console.log(countBinarySubstrings("00110011"));
 console.log(countBinarySubstrings("10101"));
 console.log(countBinarySubstrings("10"));
 console.log(countBinarySubstrings("00110"));
+console.log(countBinarySubstrings("100111001"));
 

@@ -1,8 +1,5 @@
-var tmp = 123;
+var a = {};
+for(var i = 0;i<100;i++){
+    console.log(i);
 
-function c() {
-    var d = c;
-    console.log(tmp);
-    var tmp = 2;
 }
-c();
